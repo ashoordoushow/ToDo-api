@@ -1,9 +1,18 @@
-# This file should ensure the existence of records required to run the application in every environment (production,
-# development, test). The code here should be idempotent so that it can be executed at any point in every environment.
-# The data can then be loaded with the bin/rails db:seed command (or created alongside the database with db:setup).
-#
-# Example:
-#
-#   ["Action", "Comedy", "Drama", "Horror"].each do |genre_name|
-#     MovieGenre.find_or_create_by!(name: genre_name)
-#   end
+require 'csv'
+
+file = File.join(Rails.root, "db", "todossheet.csv")
+CSV.foreach(file) do |row|
+  user_id = row[0]
+# p user_id
+  category_id = row[1]
+# p category_id
+  title = row[2]
+# p title
+  description = row[3]
+# p description
+  deadline = row[4]
+# p deadline
+  completed = row[5]
+# p completed
+  Todo.create(user_id: user_id, category_id: category_id, title: title, description: description, deadline: deadline, completed: completed)
+end
