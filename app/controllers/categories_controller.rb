@@ -1,21 +1,32 @@
 class CategoriesController < ApplicationController
   def index
-    render json: {name: "hello"}
+    @categories = Category.all
+    render :index
   end
 
   def show
-    render json: {name: "goodbye"}
+    @category = Category.find_by(id: params[:id])
+    render :show
   end
 
   def create
-    render json: {name: "billy"}
+    @category = Category.create(
+      name: params[:name]
+    )
+    render :show
   end
 
   def update
-    render json: {name: "sports"}
+    @category = Category.find_by(id: params[:id])
+    @category.update(
+      name: params[:name] || @name.name
+    )
+    render :show
   end
   
   def destroy
-    render json: {name: "pop"}
+    @category = Category.find_by(id: params[:id])
+    @category.destroy
+    render json: { message: "Photo destroyed successfully" }
   end
 end
