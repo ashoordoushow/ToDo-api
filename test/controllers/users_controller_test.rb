@@ -2,31 +2,31 @@ require "test_helper"
 
 class UsersControllerTest < ActionDispatch::IntegrationTest
   test "index" do
-    get "/photos.json"
+    get "/users.json"
     assert_response 200
 
     data = JSON.parse(response.body)
-    assert_equal Photo.count, data.length
+    assert_equal User.count, data.length
   end
 
   test "create" do
-    assert_difference "Photo.count", 1 do
-      post "/photos.json", params: { name: "lake", width: 800, height: 600 }
+    assert_difference "User.count", 1 do
+      post "/users.json", params: { name: "lake", email: "email", password_digest: "password_digest" }
       assert_response 200
     end
   end
 
   test "show" do
-    get "/photos/#{Photo.first.id}.json"
+    get "/users/#{User.first.id}.json"
     assert_response 200
 
     data = JSON.parse(response.body)
-    assert_equal ["id", "name", "width", "height", "created_at", "updated_at"], data.keys
+    assert_equal ["id", "name", "email", "password_digest", "created_at", "updated_at"], data.keys
   end
 
   test "update" do
-    photo = Photo.first
-    patch "/photos/#{photo.id}.json", params: { name: "Updated name" }
+    user = User.first
+    patch "/users/#{user.id}.json", params: { name: "Updated name" }
     assert_response 200
 
     data = JSON.parse(response.body)
@@ -34,8 +34,8 @@ class UsersControllerTest < ActionDispatch::IntegrationTest
   end
 
   test "destroy" do
-    assert_difference "Photo.count", -1 do
-      delete "/photos/#{Photo.first.id}.json"
+    assert_difference "User.count", -1 do
+      delete "/users/#{User.first.id}.json"
       assert_response 200
     end
   end

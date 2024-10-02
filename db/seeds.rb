@@ -16,3 +16,4 @@ CSV.foreach(file) do |row|
 # p completed
   Todo.create(user_id: user_id, category_id: category_id, title: title, description: description, deadline: deadline, completed: completed)
 end
+
