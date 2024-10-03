@@ -14,12 +14,10 @@ Rails.application.routes.draw do
   patch "/todos/:id" => "todos#update"
   delete "/todos/:id" => "todos#destroy"
 
-  get "users" => "users#index"
-  get "users/:id" => "users#show"
-  patch "/users/:id" => "users#update"
-  delete "/users/:id" => "users#destroy"
   post "/users" => "users#create"
+
   post "/sessions" => "sessions#create"
+  
   get "/categories" => "categories#index"
   get "/categories/:id" => "categories#show"
   post "/categories" => "categories#create"
