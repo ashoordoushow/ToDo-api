@@ -2,7 +2,7 @@ class TodosController < ApplicationController
 
 
   def index
-    @todos = Todo.all
+    @todos = Todo.order(deadline: :asc)
     render :index
   end
 
